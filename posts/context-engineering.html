@@ -72,254 +72,36 @@
         }
 
         strong { font-weight: 700; }
+        em { font-style: italic; }
 
-        .paper-card {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 24px;
+        a { color: #4f46e5; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        ul {
             margin-bottom: 20px;
+            padding-left: 24px;
         }
 
-        .paper-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: #0f172a;
-        }
-
-        .paper-card .paper-meta {
-            font-size: 13px;
-            color: #6b7280;
+        li {
             margin-bottom: 12px;
-        }
-
-        .paper-card p {
-            font-size: 15px;
-            margin-bottom: 0;
-            color: #374151;
-        }
-
-        .paper-card .finding {
-            font-weight: 600;
-            color: #dc2626;
-        }
-
-        /* U-shaped chart */
-        .chart-container {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 32px 24px 24px;
-            margin: 32px 0;
-            text-align: center;
-        }
-
-        .chart-container h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: #0f172a;
-        }
-
-        .chart-container .chart-subtitle {
-            font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 20px;
-        }
-
-        .chart-container svg {
-            width: 100%;
-            max-width: 580px;
-            height: auto;
-        }
-
-        .chart-container .chart-source {
-            font-size: 12px;
-            color: #9ca3af;
-            margin-top: 12px;
-        }
-
-        /* Token scale */
-        .token-scale {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 28px 24px;
-            margin: 32px 0;
-        }
-
-        .token-scale h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #0f172a;
-            text-align: center;
-        }
-
-        .scale-bar {
-            position: relative;
-            height: 40px;
-            background: linear-gradient(90deg, #22c55e 0%, #22c55e 2.5%, #eab308 5%, #ef4444 30%, #7f1d1d 100%);
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        .scale-marker {
-            position: absolute;
-            top: -8px;
-            width: 2px;
-            height: 56px;
-            background: #0f172a;
-        }
-
-        .scale-marker .marker-label {
-            position: absolute;
-            bottom: -24px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            font-weight: 600;
-            color: #0f172a;
-            white-space: nowrap;
-        }
-
-        .scale-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 28px;
-        }
-
-        .scale-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .scale-row .bar {
-            height: 28px;
-            border-radius: 6px;
-            min-width: 4px;
-        }
-
-        .scale-row .label {
-            font-size: 14px;
-            color: #374151;
-            white-space: nowrap;
-        }
-
-        .scale-row .tokens {
-            font-size: 12px;
-            color: #9ca3af;
-            margin-left: auto;
-            white-space: nowrap;
-        }
-
-        /* Four operations */
-        .ops-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 32px 0;
-        }
-
-        @media (max-width: 520px) {
-            .ops-grid { grid-template-columns: 1fr; }
-        }
-
-        .op-card {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .op-card .op-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .op-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #0f172a;
-        }
-
-        .op-card p {
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 0;
-            line-height: 1.5;
-        }
-
-        /* Practice tips */
-        .tip {
-            border-left: 3px solid #4f46e5;
-            padding-left: 20px;
-            margin-bottom: 24px;
-        }
-
-        .tip h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #0f172a;
-        }
-
-        .tip p {
-            font-size: 15px;
-            color: #374151;
-            margin-bottom: 0;
-        }
-
-        /* Takeaway */
-        .takeaway {
-            background: #0f172a;
-            color: #fff;
-            border-radius: 12px;
-            padding: 32px;
-            margin: 40px 0;
-        }
-
-        .takeaway h2 {
-            color: #fff;
-            margin-top: 0;
-            margin-bottom: 16px;
-        }
-
-        .takeaway p {
-            color: #cbd5e1;
-            font-size: 16px;
-        }
-
-        .takeaway ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 16px;
-        }
-
-        .takeaway li {
-            padding: 6px 0;
-            font-size: 15px;
-            color: #e2e8f0;
-        }
-
-        .takeaway li::before {
-            content: "→ ";
-            color: #818cf8;
-        }
-
-        .takeaway .punchline {
             font-size: 17px;
-            font-weight: 600;
-            color: #fff;
         }
 
-        /* Further reading */
+        blockquote {
+            border-left: 3px solid #4f46e5;
+            padding: 16px 20px;
+            margin: 28px 0;
+            background: #f0f0ff;
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote p {
+            font-size: 16px;
+            font-style: italic;
+            color: #374151;
+            margin-bottom: 0;
+        }
+
         .further-reading {
             margin-top: 48px;
             padding-top: 32px;
@@ -331,13 +113,10 @@
             margin-bottom: 16px;
         }
 
-        .further-reading a {
-            color: #4f46e5;
-            text-decoration: none;
-            font-size: 15px;
+        .further-reading ul {
+            list-style: none;
+            padding: 0;
         }
-
-        .further-reading a:hover { text-decoration: underline; }
 
         .further-reading li {
             margin-bottom: 10px;
@@ -345,10 +124,13 @@
             color: #6b7280;
         }
 
-        .further-reading ul {
-            list-style: none;
-            padding: 0;
+        .further-reading a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 15px;
         }
+
+        .further-reading a:hover { text-decoration: underline; }
 
         .footer {
             margin-top: 48px;
@@ -363,27 +145,7 @@
             text-decoration: none;
         }
 
-        /* Quote */
-        blockquote {
-            border-left: 3px solid #4f46e5;
-            padding: 16px 20px;
-            margin: 28px 0;
-            background: #f0f0ff;
-            border-radius: 0 8px 8px 0;
-        }
-
-        blockquote p {
-            font-size: 16px;
-            font-style: italic;
-            color: #374151;
-            margin-bottom: 4px;
-        }
-
-        blockquote .attribution {
-            font-size: 13px;
-            font-style: normal;
-            color: #6b7280;
-        }
+        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -397,196 +159,137 @@
             By <a href="https://www.linkedin.com/in/ramanansiva">Ramanan Sivasubramanian</a> &middot; March 2026
         </div>
 
-        <p class="lead">In my <a href="https://www.linkedin.com/in/ramanansiva">previous post</a>, I argued that context engineering is reshaping on-call. A few people asked the obvious question: why can't you just give the LLM all the logs and let it figure it out?</p>
+        <p class="lead">In my <a href="oncall-engineers-new-partner.html">previous post</a>, I argued that context engineering is reshaping on-call. A few people asked the obvious question: why can't you just give the LLM all the logs and let it figure it out?</p>
 
-        <p class="lead">Because that doesn't work. And the research explains exactly why.</p>
+        <p class="lead">Because that makes things worse, not better. And the research &mdash; and our field experience &mdash; explains exactly why.</p>
 
-        <!-- Section: Can Accept Is Not Can Use -->
-        <h2>"Can Accept" Is Not "Can Use"</h2>
+        <h2>Two Domains, Same Problem</h2>
 
-        <p>We talk about models with 100K, 200K, even 1M token context windows as if capacity equals capability. It doesn't. Three papers make this uncomfortably clear.</p>
+        <p>At Saarthi, we build AI systems for two very different users: doctors in ERs and ICUs, and on-call engineers during production incidents. Different domains. Same bottleneck.</p>
 
-        <div class="paper-card">
-            <h3>Lost in the Middle</h3>
-            <div class="paper-meta">Liu et al. &middot; Stanford &middot; 2023</div>
-            <p>LLMs exhibit a U-shaped attention curve &mdash; strong at the beginning and end of the context, <span class="finding">significant degradation in the middle</span>. With 20+ documents, performance dropped <em>below</em> the no-context baseline. More data made the model less accurate than giving it nothing.</p>
-        </div>
+        <p>A nephrologist receiving a referral from a cardiologist doesn't need the patient's full history. They need creatinine trends, current medications (especially nephrotoxic ones), and the specific question the cardiologist is asking. A 50-page record is noise. Five relevant data points are signal.</p>
 
-        <div class="paper-card">
-            <h3>Needle in the Haystack</h3>
-            <div class="paper-meta">Nelson et al. &middot; IBM Research &middot; 2024</div>
-            <p>Even simple fact retrieval &mdash; finding a single planted sentence &mdash; <span class="finding">breaks down as context length increases</span>. Longer window, more noise, worse results.</p>
-        </div>
+        <p>An SRE getting paged about a payment service failure doesn't need every log line from every service. They need error logs from the payment service, logs from its upstream dependencies, and the most recent deploy. 5,000 lines of health checks is noise. The 5 lines showing the cascade is signal.</p>
 
-        <div class="paper-card">
-            <h3>Prompt Repetition</h3>
-            <div class="paper-meta">Leviathan et al. &middot; Google Research &middot; 2025</div>
-            <p>The <em>order</em> of information materially changes output quality. Repeating the query after the context <span class="finding">improved accuracy in 47/70 tests with 0 regressions</span>. Causal models process left-to-right and can't attend backwards.</p>
-        </div>
+        <p>In both cases, the human is the expert reasoner. The doctor makes the clinical judgment. The engineer makes the triage call. But before they can reason, someone &mdash; or something &mdash; needs to assemble the right context.</p>
 
-        <!-- U-shaped chart -->
-        <div class="chart-container">
-            <h3>The U-Shaped Attention Curve</h3>
-            <div class="chart-subtitle">Model accuracy by position of relevant information in context</div>
-            <svg viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg">
-                <!-- Grid -->
-                <line x1="60" y1="30" x2="60" y2="230" stroke="#e5e7eb" stroke-width="1"/>
-                <line x1="60" y1="230" x2="550" y2="230" stroke="#e5e7eb" stroke-width="1"/>
-                <!-- Horizontal grid lines -->
-                <line x1="60" y1="80" x2="550" y2="80" stroke="#f3f4f6" stroke-width="1"/>
-                <line x1="60" y1="130" x2="550" y2="130" stroke="#f3f4f6" stroke-width="1"/>
-                <line x1="60" y1="180" x2="550" y2="180" stroke="#f3f4f6" stroke-width="1"/>
-                <!-- Y-axis labels -->
-                <text x="50" y="35" text-anchor="end" font-size="11" fill="#9ca3af">High</text>
-                <text x="50" y="233" text-anchor="end" font-size="11" fill="#9ca3af">Low</text>
-                <text x="15" y="135" text-anchor="middle" font-size="11" fill="#6b7280" transform="rotate(-90, 15, 135)">Accuracy</text>
-                <!-- X-axis labels -->
-                <text x="85" y="252" font-size="11" fill="#6b7280">Start</text>
-                <text x="285" y="252" text-anchor="middle" font-size="11" fill="#6b7280">Middle</text>
-                <text x="520" y="252" text-anchor="end" font-size="11" fill="#6b7280">End</text>
-                <text x="305" y="272" text-anchor="middle" font-size="11" fill="#9ca3af">Position of relevant information in context</text>
-                <!-- U-shaped curve -->
-                <path d="M 80 50 C 120 55, 160 90, 200 160 C 240 210, 280 220, 305 215 C 330 220, 370 210, 410 160 C 450 90, 490 55, 530 45" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round"/>
-                <!-- Data points -->
-                <circle cx="80" cy="50" r="5" fill="#4f46e5"/>
-                <circle cx="140" cy="72" r="5" fill="#4f46e5"/>
-                <circle cx="200" cy="160" r="5" fill="#4f46e5"/>
-                <circle cx="260" cy="205" r="5" fill="#4f46e5"/>
-                <circle cx="305" cy="215" r="5" fill="#ef4444"/>
-                <circle cx="350" cy="205" r="5" fill="#4f46e5"/>
-                <circle cx="410" cy="160" r="5" fill="#4f46e5"/>
-                <circle cx="470" cy="72" r="5" fill="#4f46e5"/>
-                <circle cx="530" cy="45" r="5" fill="#4f46e5"/>
-                <!-- Danger zone highlight -->
-                <rect x="195" y="145" width="220" height="85" rx="8" fill="#fef2f2" opacity="0.5"/>
-                <text x="305" y="175" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">Danger zone</text>
-                <text x="305" y="192" text-anchor="middle" font-size="11" fill="#dc2626">Your critical ERROR line</text>
-                <text x="305" y="207" text-anchor="middle" font-size="11" fill="#dc2626">is probably here</text>
-                <!-- No-context baseline -->
-                <line x1="60" y1="185" x2="550" y2="185" stroke="#dc2626" stroke-width="1" stroke-dasharray="6,4"/>
-                <text x="553" y="189" font-size="10" fill="#dc2626">no-context baseline</text>
-            </svg>
-            <div class="chart-source">Adapted from Liu et al., "Lost in the Middle" (2023)</div>
-        </div>
+        <p>That assembly step is where most of the time is spent. And it's where current AI tools fall short.</p>
 
-        <!-- Token scale -->
-        <div class="token-scale">
-            <h3>What Does 3,000 Tokens Actually Look Like?</h3>
-            <p style="font-size: 14px; color: #6b7280; text-align: center; margin-bottom: 20px;">LLM reasoning degrades around 3,000 tokens. Here's how much that is:</p>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="scale-row">
-                    <div class="bar" style="width: 100%; background: #22c55e;"></div>
-                    <div class="label" style="min-width: 140px;"><strong>~2,000 words</strong></div>
-                    <div class="tokens">3K tokens</div>
-                </div>
-                <div class="scale-row">
-                    <div class="bar" style="width: 100%; background: #22c55e;"></div>
-                    <div class="label" style="min-width: 140px;"><strong>~50-60 log lines</strong></div>
-                    <div class="tokens">3K tokens</div>
-                </div>
-                <div class="scale-row">
-                    <div class="bar" style="width: 600%; background: linear-gradient(90deg, #22c55e 16.6%, #ef4444 16.6%); max-width: 100%;"></div>
-                    <div class="label" style="min-width: 140px;">1 min of production logs</div>
-                    <div class="tokens">~18K tokens</div>
-                </div>
-                <div class="scale-row">
-                    <div class="bar" style="width: 100%; background: #ef4444; max-width: 100%;"></div>
-                    <div class="label" style="min-width: 140px;">15 min incident window</div>
-                    <div class="tokens">~270K tokens</div>
-                </div>
-            </div>
-            <p style="font-size: 13px; color: #9ca3af; text-align: center; margin-top: 16px; margin-bottom: 0;">Every token you send needs to earn its place.</p>
-        </div>
+        <h2>Why "Just Use AI" Fails</h2>
 
-        <!-- What this means in practice -->
-        <h2>What This Means in Practice</h2>
+        <p>There's a common assumption: models have 200K token context windows now, so just send everything and let the model figure it out.</p>
 
-        <p>These aren't academic curiosities. If you're building any AI system that consumes real-world data &mdash; incident response, healthcare, legal, customer support &mdash; the implications are direct.</p>
+        <p><strong>Lost in the Middle</strong> (Liu et al., Stanford, 2023) showed that LLMs exhibit a U-shaped attention curve. They attend well to information at the beginning and end of the context but significantly degrade in the middle. With 20+ documents, model performance dropped <em>below</em> the no-context baseline. More data made the model less accurate than giving it nothing.</p>
 
-        <div class="tip">
-            <h3>Filter before you prompt</h3>
-            <p>Don't send the model everything. Filter by time window, by service, by severity. Score by relevance. 500 filtered lines beat 5,000 raw lines every time.</p>
-        </div>
+        <p><strong>Needle in the Haystack</strong> (Nelson et al., IBM Research, 2024) demonstrated that even simple fact retrieval breaks down as context length increases.</p>
 
-        <div class="tip">
-            <h3>Order matters</h3>
-            <p>Put high-signal information at the beginning and end. The middle is where information goes to die. Lead with the alert, end with the question.</p>
-        </div>
+        <p><strong>Prompt Repetition</strong> (Leviathan et al., Google Research, 2025) found that the <em>order</em> and <em>structure</em> of information materially changes output quality. Simply repeating the query improved accuracy in 47 out of 70 tests with zero regressions.</p>
 
-        <div class="tip">
-            <h3>Less is more (until it isn't)</h3>
-            <p>Too few lines and the model hallucinates connections. Too many and it misses the real ones. The right number depends on signal density, not volume.</p>
-        </div>
+        <p>LLM reasoning starts degrading around 3,000 tokens &mdash; roughly 50 to 60 log lines. That's not a lot of context when your systems generate thousands of lines per minute.</p>
 
-        <div class="tip">
-            <h3>Structure like a briefing, not a dump</h3>
-            <p>Situation first, evidence next, question last. This isn't just good UX &mdash; it's aligned with how causal attention actually works.</p>
-        </div>
+        <h2>It's Not Just Models &mdash; It's AI Output in General</h2>
 
-        <!-- The Discipline -->
-        <h2>The Discipline</h2>
+        <p>CodeRabbit's study of 470 GitHub PRs (2026) found that AI-authored work contains <strong>1.7x more issues</strong> than human work &mdash; 75% more logic errors, nearly 2x more error handling gaps, up to 2.74x more security issues.</p>
 
-        <blockquote>
-            <p>"Finding the smallest possible set of high-signal tokens that maximize the likelihood of a desired outcome."</p>
-            <div class="attribution">&mdash; Anthropic Engineering, on context engineering</div>
-        </blockquote>
+        <p>The root cause: AI models "infer patterns statistically, not semantically." They miss business logic, local conventions, and context that experienced practitioners internalize.</p>
 
-        <p>Intelligence isn't the bottleneck. Context is. The discipline breaks down into four operations:</p>
+        <p>Their conclusion: <strong>"Input quality directly correlates with output reliability."</strong></p>
 
-        <div class="ops-grid">
-            <div class="op-card">
-                <div class="op-icon">&#x1F50D;</div>
-                <h3>Selection</h3>
-                <p>Choosing what goes in &mdash; and what stays out. The most important decision you make.</p>
-            </div>
-            <div class="op-card">
-                <div class="op-icon">&#x2195;</div>
-                <h3>Ordering</h3>
-                <p>Placing information where the model attends best. Start and end, not the middle.</p>
-            </div>
-            <div class="op-card">
-                <div class="op-icon">&#x1F4CB;</div>
-                <h3>Structuring</h3>
-                <p>Formatting so the model can parse efficiently. Briefing, not raw dump.</p>
-            </div>
-            <div class="op-card">
-                <div class="op-icon">&#x1F3AF;</div>
-                <h3>Scoping</h3>
-                <p>Right-sizing the context for the task. Every token earns its place.</p>
-            </div>
-        </div>
+        <p>This applies everywhere. A model summarizing 5,000 raw log lines will produce a confident summary that misses the root cause &mdash; because the signal was buried at position 2,500 where the model's attention is weakest.</p>
 
-        <p>This applies whether you're summarizing incident logs, assisting a doctor with a differential diagnosis, analyzing a legal contract, or triaging support tickets. The domain changes. The discipline doesn't.</p>
+        <h2>The Abstention Problem</h2>
 
-        <p>At Saarthi, we apply this across healthcare and incident management. The doctor in an ER and the engineer on-call at 3am have the same need: the right information, structured for fast decisions, delivered before the situation gets worse.</p>
+        <p>Here's where it gets uncomfortable.</p>
 
-        <!-- Takeaway -->
-        <div class="takeaway">
-            <h2>The Takeaway</h2>
-            <p>Next time someone says "just increase the context window" or "just send it all the data":</p>
-            <ul>
-                <li>More context often means worse results (Lost in the Middle)</li>
-                <li>Long-context retrieval is unreliable (Needle in the Haystack)</li>
-                <li>Prompt structure changes model behavior (Prompt Repetition)</li>
-            </ul>
-            <p class="punchline">The LLM is the reasoning engine. Context engineering is everything else &mdash; and it's where the real work happens.</p>
-        </div>
+        <p>AbstentionBench (June 2025) evaluated 20 frontier models on their ability to say "I don't know" across diverse question types &mdash; unanswerable questions, false premises, underspecified problems, subjective topics.</p>
 
-        <!-- Further Reading -->
+        <p>Two findings that matter:</p>
+
+        <p>First: <strong>scaling doesn't help.</strong> Larger models are not better at abstaining. The ability to know your limits is not a capability that improves with more parameters.</p>
+
+        <p>Second: <strong>reasoning fine-tuning makes it worse.</strong> Reasoning-trained models like DeepSeek R1 showed a <strong>24% drop</strong> in abstention compared to their non-reasoning counterparts. Teaching a model to reason harder makes it <em>less</em> likely to admit it doesn't know.</p>
+
+        <p>This is a fundamental observation. The path to expert-level AI is not "make the model smarter." Smarter models are worse at knowing their limits.</p>
+
+        <h2>What Context Engineering Actually Is</h2>
+
+        <p>Anthropic's engineering team defines it as finding "the smallest possible set of high-signal tokens that maximize the likelihood of a desired outcome."</p>
+
+        <p>This is an engineering discipline, not a prompt trick. It means:</p>
+
+        <p><strong>Selecting what matters</strong> &mdash; knowing which sources to query based on the specific question and the domain's structure. Not everything is relevant. An expert knows what to look at and what to skip.</p>
+
+        <p><strong>Compressing noise</strong> &mdash; the same error appears 47 times. Health checks flood the output. Systematic deduplication and pattern normalization reduce thousands of lines to hundreds without losing signal.</p>
+
+        <p><strong>Scoring by relevance</strong> &mdash; not all evidence is equally useful for every question. Different question types need different evidence prioritized.</p>
+
+        <p><strong>Assessing quality</strong> &mdash; knowing what you <em>don't</em> have. If a data source is unreachable or returns nothing, that's information. The model needs to see its own blind spots.</p>
+
+        <p><strong>Structuring for attention</strong> &mdash; arranging the context so the model attends to what matters. This isn't formatting &mdash; it's aligned with how transformer attention works.</p>
+
+        <h2>The Assembly-Reasoning Split</h2>
+
+        <p>Working across healthcare and incident management led us to a realization: expertise has two distinct components, and they're often performed by different actors.</p>
+
+        <p><strong>Intelligent assembly</strong> &mdash; knowing what context to gather, for whom, at what moment. This is pattern matching on what-context-helps-when. It's what a senior nephrologist does before they start reasoning about the case &mdash; they know which data points to look at.</p>
+
+        <p><strong>Domain reasoning</strong> &mdash; given assembled context, drawing conclusions and deciding actions.</p>
+
+        <p>The critical finding from our field work: <strong>in most high-stakes domains, the human is the reasoner.</strong> Doctors in routine clinical settings didn't want AI reasoning. They wanted the right context at the right time so they could reason faster. SREs in some cases want AI reasoning (triage brief, RCA), but the foundation is always the same: the context must be assembled first.</p>
+
+        <p>This means the higher-value, more tractable problem is not "how do we make AI reason better" but "how do we make AI assemble context like an expert would."</p>
+
+        <h2>The Uncomfortable Implication</h2>
+
+        <p>With disciplined context engineering, a smaller model can approach the output quality of a larger model on structured tasks.</p>
+
+        <p>The ACE framework (ICLR 2026) demonstrated this: a smaller open-source model with engineered context matched the top-ranked production agent &mdash; which used a significantly larger model. At the ARC Prize 2025, a 76K-parameter system outperformed models 1,000x its size through structured representation rather than scale.</p>
+
+        <p>This changes the economics. If context engineering is good enough, the model tier becomes a cost lever, not a quality lever.</p>
+
+        <h2>What This Doesn't Solve</h2>
+
+        <p>Context engineering makes the model's output better when evidence exists and can be retrieved. It doesn't help when:</p>
+
+        <ul>
+            <li><strong>The data doesn't exist.</strong> No amount of engineering conjures data that was never logged.</li>
+            <li><strong>The problem requires novel reasoning.</strong> A cascading failure with a non-obvious trigger needs human judgment.</li>
+            <li><strong>The context is inherently ambiguous.</strong> When signals contradict, a human needs to resolve it.</li>
+        </ul>
+
+        <p>And the AbstentionBench finding is a reminder: even with perfect context, the model may still overclaim. External constraints (mandatory evidence citation, structural confidence fields, domain invariant checking) help, but the architecture's bias toward fluent output remains.</p>
+
+        <p>The goal is to make expert-level decisions faster &mdash; not to eliminate the expert.</p>
+
+        <h2>Where This Goes</h2>
+
+        <p>The teams that get this right will have measurably better outcomes &mdash; lower MTTR for incidents, faster clinical decisions, more accurate triage &mdash; not because they use a fancier model, but because they engineer the context that feeds it.</p>
+
+        <p>At Saarthi, we've been applying this across healthcare and incident management. The same principles work in both domains. The domain changes. The discipline doesn't.</p>
+
+        <p>More on that in a future post.</p>
+
         <div class="further-reading">
             <h2>Further Reading</h2>
             <ul>
                 <li><a href="https://arxiv.org/abs/2307.03172">Liu et al.: Lost in the Middle</a> &mdash; Stanford, 2023</li>
                 <li><a href="https://arxiv.org/abs/2407.01437">Nelson et al.: Needle in the Haystack</a> &mdash; IBM Research, 2024</li>
                 <li><a href="https://arxiv.org/abs/2512.14982">Leviathan et al.: Prompt Repetition</a> &mdash; Google Research, 2025</li>
+                <li><a href="https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report">CodeRabbit: State of AI vs Human Code Generation</a> &mdash; 2026</li>
+                <li><a href="https://arxiv.org/abs/2506.09038">AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions</a> &mdash; 2025</li>
+                <li><a href="https://arxiv.org/abs/2510.04618">ACE: Agentic Context Engineering</a> &mdash; ICLR 2026</li>
                 <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a></li>
             </ul>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
-            <p>Part 2 of a series on context engineering in practice. Previously: <em>The On-Call Engineer's New Partner</em>. Next: applying these principles to an open-source tool.</p>
-            <p style="margin-top: 12px;"><a href="https://www.linkedin.com/in/ramanansiva">Connect on LinkedIn</a> &middot; <a href="https://github.com/SaarthiHQ/kairos-agent">GitHub: SaarthiHQ/kairos-agent</a></p>
+            <p>Part 2 of a series on context engineering in practice. Previously: <a href="oncall-engineers-new-partner.html">The On-Call Engineer's New Partner</a>. Next: applying these principles to an open-source tool.</p>
+            <p style="margin-top: 8px;"><em>Reach out on <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a>.</em></p>
+            <p style="margin-top: 12px;">
+                <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a> &middot;
+                <a href="https://github.com/SaarthiHQ">GitHub</a> &middot;
+                <a href="https://saarthihealth.com">saarthihealth.com</a>
+            </p>
         </div>
 
     </div>

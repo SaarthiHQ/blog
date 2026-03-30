@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The On-Call Engineer's New Partner | Saarthi</title>
+    <meta name="description" content="How AI is changing incident response. Context assembly, not replacement, is the key to faster on-call.">
+    <meta property="og:title" content="The On-Call Engineer's New Partner: How AI Is Changing Incident Response">
+    <meta property="og:description" content="The investigative grunt work that precedes every decision is exactly the kind of task AI is built to absorb.">
+    <meta property="og:type" content="article">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .series-tag {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+
+        .byline {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 48px;
+        }
+
+        .byline a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .lead {
+            font-size: 19px;
+            color: #374151;
+        }
+
+        strong { font-weight: 700; }
+        em { font-style: italic; }
+
+        a { color: #4f46e5; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 16px;
+            font-size: 17px;
+        }
+
+        blockquote {
+            border-left: 3px solid #4f46e5;
+            padding: 16px 20px;
+            margin: 28px 0;
+            background: #f0f0ff;
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote p {
+            font-size: 16px;
+            font-style: italic;
+            color: #374151;
+            margin-bottom: 0;
+        }
+
+        .further-reading {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .further-reading h2 {
+            font-size: 1.1em;
+            margin-bottom: 16px;
+        }
+
+        .further-reading ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .further-reading li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #6b7280;
+        }
+
+        .further-reading a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .further-reading a:hover { text-decoration: underline; }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        .footer a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .footer a:hover { text-decoration: underline; }
+
+        .series-nav {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .series-nav a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .series-nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="series-tag">Context Engineering in Practice &mdash; Part 1 of 3</div>
+
+        <h1>The On-Call Engineer's New Partner: How AI Is Changing Incident Response</h1>
+
+        <div class="byline">
+            By <a href="https://www.linkedin.com/in/ramanansiva">Ramanan Sivasubramanian</a> &middot; March 2026
+        </div>
+
+        <p class="lead">When a PagerDuty alert fires at 3am, the on-call engineer's first 20 minutes look the same everywhere: open the dashboard, grep through logs, check recent deploys, scan for patterns, form a hypothesis. It's detective work under pressure, repeated thousands of times a day across the industry.</p>
+
+        <p>And it's not just SRE teams. On-call rotations span support engineers, backend developers, platform teams, and dev teams &mdash; anyone who owns a service in production. The 3am page doesn't check your job title.</p>
+
+        <p>That ritual is about to change fundamentally. Not because AI will replace the engineer &mdash; but because the <em>investigative grunt work</em> that precedes every decision is exactly the kind of task AI is built to absorb.</p>
+
+        <h2>The Incident Response Tax</h2>
+
+        <p>Here's the dirty secret of modern incident response: the tools got better, but the cognitive load didn't shrink. We went from monoliths to microservices, from one log file to a hundred, from one dashboard to Datadog plus Grafana plus CloudWatch plus whatever your platform team chose last quarter.</p>
+
+        <p>Ask any on-call engineer: the time-to-understand for a production incident hasn't meaningfully improved in a decade. We added observability. We added runbooks. We added war rooms. But the engineer still starts every incident staring at a wall of data, trying to figure out which 15 lines out of 50,000 actually matter.</p>
+
+        <p>That's not an engineering problem. That's a <em>context assembly</em> problem.</p>
+
+        <h2>Context Engineering: Not Just a Buzzword</h2>
+
+        <p>I've been thinking about context assembly across two very different domains.</p>
+
+        <p>At Saarthi, we build AI assistants for doctors &mdash; oncologists, nephrologists, gastroenterologists working in ERs and ICUs where decisions are time-critical and information is scattered across charts, lab results, imaging reports, and clinical guidelines. Incident response is the same problem wearing a different hat. The "patient" is a production system. The "charts" are log files. The "clinical guidelines" are runbooks. And the decision-maker &mdash; the on-call engineer &mdash; is trying to separate signal from noise before things get worse.</p>
+
+        <p>In both cases, the bottleneck isn't skill. It's the time spent <em>loading context into the decision-maker's brain</em>.</p>
+
+        <p>One important caveat: context engineering is not context <em>stuffing</em>. You can't dump 50,000 log lines into an LLM and expect a useful answer. Models degrade with longer contexts &mdash; they lose information in the middle, struggle with retrieval as noise increases, and are sensitive to how information is ordered. More context often means <em>worse</em> results.</p>
+
+        <p>The "engineering" is the deliberate work of filtering, ranking, and structuring information so the model can actually use it. The LLM is the reasoning engine. The real work is everything that happens before the prompt. (More on the science behind this in <a href="context-engineering.html">Part 2</a>.)</p>
+
+        <h2>Three Shifts</h2>
+
+        <p>The industry is already moving. Datadog's Bits AI SRE performs autonomous, multi-step investigations across telemetry data. Platforms like incident.io and Rootly are embedding AI directly into incident workflows. These tools validate that the core idea is sound &mdash; and raise a question worth asking: what should an engineer actually be spending their time on during an incident?</p>
+
+        <p>Collecting logs isn't it. Correlating timestamps isn't it. Those are tasks that require attention but not judgment. An engineer's time during an incident belongs to the things only a human can do: deciding the right course of action, coordinating across teams, communicating with stakeholders.</p>
+
+        <p>I see three shifts reshaping on-call:</p>
+
+        <ul>
+            <li><strong>Context assembly becomes AI's job.</strong> Alert fires, an agent pulls logs from the relevant time window, filters and ranks by severity, sends the context to an LLM, and posts a triage brief to Slack. The on-call gets a 30-second read &mdash; what's happening, key evidence, likely root cause, what to do first. The engineer still makes every decision. They just make it in minute two instead of minute twenty.</li>
+            <li><strong>RCA becomes context assembly too.</strong> During the incident, you need to know <em>what's happening</em>. After, you need to know <em>why</em>. Both are context assembly &mdash; pulling logs, correlating events, tracing the chain of failures. The same approach that generates a triage brief in 30 seconds can draft an RCA in minutes, while the timeline is still fresh.</li>
+            <li><strong>Runbooks become dynamic.</strong> Static runbooks are written once, updated never, and discovered to be outdated at the worst possible moment. Instead of "follow step 3," the AI reads the runbook <em>and</em> the current state, and gives context-aware next steps for <em>this</em> incident &mdash; not the generic playbook written six months ago.</li>
+        </ul>
+
+        <h2>What This Won't Solve</h2>
+
+        <p>Let's be honest about the boundaries.</p>
+
+        <p><strong>AI won't replace judgment.</strong> A model can tell you the circuit breaker tripped because of upstream timeouts. It can't tell you whether to failover to an untested backup or wait 10 minutes for the primary to recover. That's a business decision wrapped in a technical one.</p>
+
+        <p><strong>AI won't fix bad observability.</strong> Garbage in, garbage out &mdash; just faster and with more confidence, which is arguably worse.</p>
+
+        <p><strong>AI won't eliminate incidents.</strong> Complex systems fail in emergent ways. AI can help you respond faster. It cannot prevent the network partition that takes down your payment pipeline.</p>
+
+        <h2>Where This Goes</h2>
+
+        <p>The real promise isn't faster incident response. It's what happens when the reactive work stops consuming all the oxygen. Engineers get to spend time on what actually matters &mdash; building resilient systems, improving observability, eliminating failure modes.</p>
+
+        <p>The starting point is simpler than you think &mdash; a webhook receiver, a context assembler, an LLM call, and a Slack message. We've been building exactly this at Saarthi, applying the same context engineering approach we use in healthcare to incident management. More on that in a future post.</p>
+
+        <p>The interesting question isn't whether AI will transform on-call. It's what the on-call role becomes when the reactive work is compressed &mdash; when it looks less like firefighting and more like engineering. That's what on-call was always supposed to enable.</p>
+
+        <div class="further-reading">
+            <h2>Further Reading</h2>
+            <ul>
+                <li><a href="https://www.datadoghq.com/blog/bits-ai-sre/">Datadog: Introducing Bits AI SRE</a> &mdash; Autonomous multi-step incident investigation</li>
+                <li><a href="https://www.datadoghq.com/blog/building-bits-ai-sre/">Datadog: How we built an AI SRE agent</a> &mdash; Multi-agent architecture for incident response</li>
+                <li><a href="https://www.infoq.com/news/2026/01/opsworker-ai-sre/">InfoQ: Human-Centred AI for SRE</a> &mdash; Multi-agent systems that assist rather than replace engineers</li>
+                <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a> &mdash; Context engineering principles and best practices</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Part 1 of a series on context engineering in practice. Next: <a href="context-engineering.html">Context Engineering Is Not Context Stuffing</a>.</p>
+            <div class="series-nav">
+                <em>If you're interested in context engineering &mdash; whether for incident response, healthcare, or something else entirely &mdash; I'd love to hear what you're building.</em>
+            </div>
+            <p style="margin-top: 12px;">
+                <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a> &middot;
+                <a href="https://github.com/SaarthiHQ">GitHub</a> &middot;
+                <a href="https://saarthihealth.com">saarthihealth.com</a>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>
