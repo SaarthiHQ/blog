@@ -287,26 +287,39 @@
         <div class="chart-box">
             <h3>The U-Shaped Attention Curve</h3>
             <div class="chart-sub">Model accuracy by position of relevant information in context</div>
-            <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Axes -->
                 <line x1="50" y1="20" x2="50" y2="180" stroke="#e5e7eb" stroke-width="1"/>
                 <line x1="50" y1="180" x2="530" y2="180" stroke="#e5e7eb" stroke-width="1"/>
+                <!-- Grid lines -->
                 <line x1="50" y1="60" x2="530" y2="60" stroke="#f3f4f6" stroke-width="1"/>
                 <line x1="50" y1="120" x2="530" y2="120" stroke="#f3f4f6" stroke-width="1"/>
+                <!-- Y-axis labels -->
                 <text x="40" y="25" text-anchor="end" font-size="10" fill="#9ca3af">High</text>
                 <text x="40" y="183" text-anchor="end" font-size="10" fill="#9ca3af">Low</text>
-                <text x="70" y="200" font-size="10" fill="#6b7280">Start</text>
-                <text x="275" y="200" text-anchor="middle" font-size="10" fill="#6b7280">Middle</text>
-                <text x="510" y="200" text-anchor="end" font-size="10" fill="#6b7280">End</text>
+                <text x="12" y="105" text-anchor="middle" font-size="10" fill="#9ca3af" transform="rotate(-90, 12, 105)">Accuracy</text>
+                <!-- X-axis labels -->
+                <text x="70" y="198" font-size="10" fill="#6b7280">Start</text>
+                <text x="290" y="198" text-anchor="middle" font-size="10" fill="#6b7280">Middle</text>
+                <text x="510" y="198" text-anchor="end" font-size="10" fill="#6b7280">End</text>
+                <text x="290" y="215" text-anchor="middle" font-size="10" fill="#94a3b8">Position of relevant information in context window</text>
+                <!-- U-shaped curve -->
                 <path d="M 70 35 C 110 40, 150 70, 190 125 C 230 165, 260 175, 290 170 C 320 175, 350 165, 390 125 C 430 70, 470 40, 510 30" fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Data points -->
                 <circle cx="70" cy="35" r="4" fill="#4f46e5"/>
                 <circle cx="190" cy="125" r="4" fill="#4f46e5"/>
-                <circle cx="290" cy="170" r="4" fill="#ef4444"/>
+                <circle cx="290" cy="170" r="4" fill="#4f46e5"/>
                 <circle cx="390" cy="125" r="4" fill="#4f46e5"/>
                 <circle cx="510" cy="30" r="4" fill="#4f46e5"/>
-                <rect x="220" y="130" width="140" height="35" rx="6" fill="#fef2f2" opacity="0.7"/>
-                <text x="290" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">Your signal is here</text>
-                <line x1="50" y1="145" x2="530" y2="145" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3"/>
-                <text x="533" y="148" font-size="9" fill="#dc2626">no-context baseline</text>
+                <!-- Shaded danger zone -->
+                <rect x="170" y="110" width="240" height="75" rx="8" fill="#fef2f2" opacity="0.4"/>
+                <text x="290" y="155" text-anchor="middle" font-size="10" fill="#dc2626">Lowest accuracy zone</text>
+                <!-- Annotations for start and end -->
+                <text x="70" y="28" text-anchor="middle" font-size="9" fill="#059669">Primacy</text>
+                <text x="510" y="23" text-anchor="middle" font-size="9" fill="#059669">Recency</text>
+                <!-- Legend -->
+                <line x1="360" y1="230" x2="380" y2="230" stroke="#4f46e5" stroke-width="2.5"/>
+                <text x="385" y="233" font-size="9" fill="#6b7280">Model accuracy (20 documents, ~4K tokens)</text>
             </svg>
             <div class="chart-source">Adapted from Liu et al., "Lost in the Middle" (2023)</div>
         </div>
