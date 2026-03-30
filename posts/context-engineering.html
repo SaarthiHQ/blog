@@ -3,165 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Context Engineering Is Not Context Stuffing | Saarthi</title>
-    <meta name="description" content="What LLM research tells us about building useful AI systems. Why more context often means worse results, and how to engineer context that works.">
-    <meta property="og:title" content="Context Engineering Is Not Context Stuffing">
-    <meta property="og:description" content="What LLM research tells us about building useful AI. More context often means worse results.">
-    <meta property="og:type" content="article">
+    <title>Context Engineering Is Not Context Stuffing | Saarthi Blog</title>
+    <meta name="description" content="What LLM research tells us about building useful AI. Why more context often means worse results. The assembly-reasoning split.">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;color:#1a1a1a;background:#fff}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.7;
-            color: #1a1a1a;
-            background: #fafafa;
-        }
+        /* Top navbar */
+        .top-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:#0f172a;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid #1e293b}
+        .top-nav .logo{font-size:16px;font-weight:800;color:#fff;text-decoration:none}
+        .top-nav .logo:hover{color:#fff;text-decoration:none}
+        .top-nav .nav-right{display:flex;align-items:center;gap:20px}
+        .top-nav .nav-right a{font-size:13px;color:#94a3b8;text-decoration:none;transition:color .15s}
+        .top-nav .nav-right a:hover{color:#fff;text-decoration:none}
 
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
-        }
+        /* Hero */
+        .hero{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:110px 24px 50px;text-align:center}
+        .hero .series{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#818cf8;margin-bottom:16px}
+        .hero h1{font-size:2.2em;font-weight:800;max-width:700px;margin:0 auto 12px;line-height:1.2}
+        .hero .byline{font-size:14px;color:#94a3b8}
+        .hero .byline a{color:#818cf8;text-decoration:none}
 
-        .series-tag {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 16px;
-        }
+        /* Three-column layout */
+        .page-layout{display:grid;grid-template-columns:200px minmax(0,720px) 200px;gap:0;justify-content:center;max-width:1200px;margin:0 auto}
+        @media(max-width:1200px){.page-layout{grid-template-columns:1fr;max-width:720px}}
 
-        h1 {
-            font-size: 2.2em;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            color: #0f172a;
-        }
+        /* Sidebars */
+        .sidebar{padding:48px 16px;position:sticky;top:60px;height:fit-content;align-self:start}
+        .sidebar-inner{padding:20px;background:#f8fafc;border-radius:12px;border:1px solid #e5e7eb}
+        .sidebar h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin-bottom:8px}
+        .sidebar p{font-size:13px;color:#64748b;margin-bottom:8px}
+        .sidebar a{color:#4f46e5;font-size:13px;font-weight:600;text-decoration:none}
+        .sidebar a:hover{text-decoration:underline}
+        .sidebar .logo-text{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:8px}
+        .sidebar-right{text-align:right}
+        .sidebar-right .sidebar-inner{text-align:left}
+        .sidebar-right .series-link{display:block;padding:6px 10px;border-radius:6px;font-size:13px;font-weight:500;color:#374151;text-decoration:none;margin-bottom:4px}
+        .sidebar-right .series-link:hover{background:#e5e7eb}
+        .sidebar-right .series-link.current{background:#e0e7ff;color:#4f46e5;font-weight:700}
+        @media(max-width:1200px){.sidebar{display:none}}
 
-        .byline {
-            font-size: 15px;
-            color: #6b7280;
-            margin-bottom: 48px;
-        }
+        /* Content */
+        .content{padding:48px 24px 80px}
+        h2{font-size:1.4em;font-weight:700;color:#0f172a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #f1f5f9}
+        p{font-size:17px;color:#374151;margin-bottom:18px}
+        strong{font-weight:700;color:#0f172a}
+        em{font-style:italic}
+        a{color:#4f46e5;text-decoration:none}
+        a:hover{text-decoration:underline}
 
-        .byline a {
-            color: #4f46e5;
-            text-decoration: none;
-        }
+        .pull-quote{border-left:4px solid #4f46e5;padding:16px 24px;margin:32px 0;background:#f8fafc;border-radius:0 12px 12px 0}
+        .pull-quote p{font-size:19px;font-weight:600;color:#0f172a;margin:0;line-height:1.5}
 
-        h2 {
-            font-size: 1.5em;
-            font-weight: 700;
-            margin-top: 48px;
-            margin-bottom: 16px;
-            color: #0f172a;
-        }
+        /* Paper cards */
+        .paper{background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:12px}
+        .paper h3{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:2px}
+        .paper .meta{font-size:12px;color:#94a3b8;margin-bottom:8px}
+        .paper p{font-size:14px;color:#374151;margin:0}
+        .paper .finding{color:#dc2626;font-weight:700}
 
-        p {
-            margin-bottom: 20px;
-            font-size: 17px;
-        }
+        /* U-shaped chart */
+        .chart-box{background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:28px 24px 20px;margin:32px 0;text-align:center}
+        .chart-box h3{font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+        .chart-box .chart-sub{font-size:12px;color:#94a3b8;margin-bottom:16px}
+        .chart-box svg{max-width:560px;width:100%;height:auto}
+        .chart-box .chart-source{font-size:11px;color:#94a3b8;margin-top:8px}
 
-        .lead {
-            font-size: 19px;
-            color: #374151;
-        }
+        /* Stats row */
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+        .stat{background:#0f172a;border-radius:12px;padding:18px;text-align:center}
+        .stat .num{font-size:28px;font-weight:800;color:#fff}
+        .stat .label{font-size:11px;color:#94a3b8;margin-top:4px}
 
-        strong { font-weight: 700; }
-        em { font-style: italic; }
+        /* Finding box */
+        .finding-box{border-radius:12px;padding:18px;margin:24px 0}
+        .finding-box.red{background:#fef2f2;border:1px solid #fecaca}
+        .finding-box.red h3{color:#dc2626;font-size:14px;margin-bottom:6px}
+        .finding-box.green{background:#f0fdf4;border:1px solid #bbf7d0}
+        .finding-box.green h3{color:#059669;font-size:14px;margin-bottom:6px}
+        .finding-box p{font-size:14px;color:#374151;margin:0}
 
-        a { color: #4f46e5; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        /* Discipline items */
+        .discipline{display:grid;gap:10px;margin:24px 0}
+        .disc-item{display:flex;gap:14px;padding:14px;background:#f8fafc;border-radius:10px}
+        .disc-item .icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+        .disc-item:nth-child(1) .icon{background:#dbeafe}
+        .disc-item:nth-child(2) .icon{background:#fef3c7}
+        .disc-item:nth-child(3) .icon{background:#dcfce7}
+        .disc-item:nth-child(4) .icon{background:#fce7f3}
+        .disc-item:nth-child(5) .icon{background:#e0e7ff}
+        .disc-item h3{font-size:14px;font-weight:700;color:#0f172a;margin-bottom:2px}
+        .disc-item p{font-size:13px;color:#6b7280;margin:0}
 
-        ul {
-            margin-bottom: 20px;
-            padding-left: 24px;
-        }
+        /* Assembly split diagram */
+        .split-diagram{background:#0f172a;border-radius:16px;padding:28px;margin:32px 0;color:#fff}
+        .split-diagram h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#818cf8;margin-bottom:16px;text-align:center}
+        .split-cols{display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:start}
+        @media(max-width:600px){.split-cols{grid-template-columns:1fr;gap:16px}}
+        .split-col{padding:16px;border-radius:12px}
+        .split-col.asm{background:#1e293b}
+        .split-col.rsn{background:#1e293b}
+        .split-col h4{font-size:14px;font-weight:700;margin-bottom:8px}
+        .split-col.asm h4{color:#22d3ee}
+        .split-col.rsn h4{color:#f472b6}
+        .split-col p{font-size:12px;color:#94a3b8;margin-bottom:6px}
+        .split-col .pct{font-size:28px;font-weight:800;margin-top:8px}
+        .split-col.asm .pct{color:#22d3ee}
+        .split-col.rsn .pct{color:#f472b6}
+        .split-divider{display:flex;align-items:center;justify-content:center;font-size:24px;color:#475569}
+        .split-finding{text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid #334155}
+        .split-finding p{font-size:13px;color:#cbd5e1;margin:0}
+        .split-finding strong{color:#fff}
 
-        li {
-            margin-bottom: 12px;
-            font-size: 17px;
-        }
+        /* Limits */
+        .limits{display:grid;gap:8px;margin:24px 0}
+        .limit{background:#fef2f2;border-radius:10px;padding:14px 16px;display:flex;gap:12px}
+        .limit .x{color:#dc2626;font-size:18px;font-weight:800;flex-shrink:0}
+        .limit p{font-size:14px;color:#374151;margin:0}
 
-        blockquote {
-            border-left: 3px solid #4f46e5;
-            padding: 16px 20px;
-            margin: 28px 0;
-            background: #f0f0ff;
-            border-radius: 0 8px 8px 0;
-        }
+        /* Further reading */
+        .reading{margin-top:48px;padding-top:32px;border-top:1px solid #e5e7eb}
+        .reading h2{border-bottom:none;font-size:1.1em;margin-bottom:12px}
+        .reading ul{list-style:none;padding:0;margin:0}
+        .reading li{margin-bottom:8px;font-size:14px}
+        .reading .src-meta{color:#94a3b8;font-size:12px}
 
-        blockquote p {
-            font-size: 16px;
-            font-style: italic;
-            color: #374151;
-            margin-bottom: 0;
-        }
+        .cta{background:#f8fafc;border-radius:16px;padding:24px;text-align:center;margin-top:40px}
+        .cta p{font-size:15px;color:#64748b;margin:0}
+        .cta a{font-weight:600}
 
-        .further-reading {
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .further-reading h2 {
-            font-size: 1.1em;
-            margin-bottom: 16px;
-        }
-
-        .further-reading ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .further-reading li {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #6b7280;
-        }
-
-        .further-reading a {
-            color: #4f46e5;
-            text-decoration: none;
-            font-size: 15px;
-        }
-
-        .further-reading a:hover { text-decoration: underline; }
-
-        .footer {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid #e5e7eb;
-            font-size: 14px;
-            color: #9ca3af;
-        }
-
-        .footer a {
-            color: #4f46e5;
-            text-decoration: none;
-        }
-
-        .footer a:hover { text-decoration: underline; }
+        /* Bottom Nav */
+        .bottom-nav{display:flex;justify-content:space-between;align-items:center;max-width:720px;margin:0 auto;padding:16px 24px 40px}
+        .bottom-nav a{font-size:13px;color:#94a3b8;text-decoration:none}
+        .bottom-nav a:hover{color:#4f46e5}
+        .bottom-nav .prev{font-weight:600;color:#4f46e5}
     </style>
 </head>
 <body>
-    <div class="container">
 
-        <div class="series-tag">Context Engineering in Practice &mdash; Part 2 of 3</div>
+<nav class="top-nav">
+    <a href="https://saarthihealth.com" class="logo">Saarthi</a>
+    <div class="nav-right">
+        <a href="../">Blog</a>
+        <a href="https://github.com/SaarthiHQ/kairos-agent">kairos</a>
+        <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a>
+        <a href="https://saarthihealth.com">saarthihealth.com</a>
+    </div>
+</nav>
 
-        <h1>Context Engineering Is Not Context Stuffing</h1>
+<div class="hero">
+    <div class="series">Context Engineering in Practice &mdash; Part 2 of 3</div>
+    <h1>Context Engineering Is Not Context Stuffing</h1>
+    <div class="byline">By <a href="https://www.linkedin.com/in/ramanansiva">Ramanan Sivasubramanian</a> &middot; March 2026</div>
+</div>
 
-        <div class="byline">
-            By <a href="https://www.linkedin.com/in/ramanansiva">Ramanan Sivasubramanian</a> &middot; March 2026
+<div class="page-layout">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar sidebar-left">
+        <div class="sidebar-inner">
+            <h4>About Saarthi</h4>
+            <p>AI systems for doctors and on-call engineers. Context engineering across healthcare and incident management.</p>
+            <p><a href="https://saarthihealth.com">saarthihealth.com</a></p>
+            <p><a href="https://github.com/SaarthiHQ">github.com/SaarthiHQ</a></p>
         </div>
+    </aside>
 
-        <p class="lead">In my <a href="oncall-engineers-new-partner.html">previous post</a>, I argued that context engineering is reshaping on-call. A few people asked the obvious question: why can't you just give the LLM all the logs and let it figure it out?</p>
+    <!-- Main Content -->
+    <div class="content">
 
-        <p class="lead">Because that makes things worse, not better. And the research &mdash; and our field experience &mdash; explains exactly why.</p>
+        <p>In my previous post, I argued that context engineering is reshaping on-call. A few people asked the obvious question: why can't you just give the LLM all the logs and let it figure it out?</p>
+
+        <p>Because that makes things worse, not better.</p>
 
         <h2>Two Domains, Same Problem</h2>
 
@@ -171,127 +184,202 @@
 
         <p>An SRE getting paged about a payment service failure doesn't need every log line from every service. They need error logs from the payment service, logs from its upstream dependencies, and the most recent deploy. 5,000 lines of health checks is noise. The 5 lines showing the cascade is signal.</p>
 
-        <p>In both cases, the human is the expert reasoner. The doctor makes the clinical judgment. The engineer makes the triage call. But before they can reason, someone &mdash; or something &mdash; needs to assemble the right context.</p>
-
-        <p>That assembly step is where most of the time is spent. And it's where current AI tools fall short.</p>
+        <div class="pull-quote">
+            <p>In both cases, the human is the expert reasoner. The doctor makes the clinical judgment. The engineer makes the triage call. But before they can reason, something needs to assemble the right context.</p>
+        </div>
 
         <h2>Why "Just Use AI" Fails</h2>
 
-        <p>There's a common assumption: models have 200K token context windows now, so just send everything and let the model figure it out.</p>
+        <p>Models have 200K token context windows now, so just send everything? The research says otherwise.</p>
 
-        <p><strong>Lost in the Middle</strong> (Liu et al., Stanford, 2023) showed that LLMs exhibit a U-shaped attention curve. They attend well to information at the beginning and end of the context but significantly degrade in the middle. With 20+ documents, model performance dropped <em>below</em> the no-context baseline. More data made the model less accurate than giving it nothing.</p>
+        <div class="paper">
+            <h3>Lost in the Middle</h3>
+            <div class="meta">Liu et al. &middot; Stanford &middot; 2023</div>
+            <p>U-shaped attention curve. With 20+ documents, performance dropped <span class="finding">below the no-context baseline</span>. More data made the model less accurate than giving it nothing.</p>
+        </div>
+        <div class="paper">
+            <h3>Needle in the Haystack</h3>
+            <div class="meta">Nelson et al. &middot; IBM Research &middot; 2024</div>
+            <p>Even simple fact retrieval &mdash; finding a single planted sentence &mdash; <span class="finding">breaks down as context length increases</span>.</p>
+        </div>
+        <div class="paper">
+            <h3>Prompt Repetition</h3>
+            <div class="meta">Leviathan et al. &middot; Google Research &middot; 2025</div>
+            <p>The order of information materially changes output. Repeating the query: <span class="finding">47/70 accuracy wins, 0 regressions</span>.</p>
+        </div>
 
-        <p><strong>Needle in the Haystack</strong> (Nelson et al., IBM Research, 2024) demonstrated that even simple fact retrieval breaks down as context length increases.</p>
+        <!-- U-shaped chart -->
+        <div class="chart-box">
+            <h3>The U-Shaped Attention Curve</h3>
+            <div class="chart-sub">Model accuracy by position of relevant information in context</div>
+            <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+                <line x1="50" y1="20" x2="50" y2="180" stroke="#e5e7eb" stroke-width="1"/>
+                <line x1="50" y1="180" x2="530" y2="180" stroke="#e5e7eb" stroke-width="1"/>
+                <line x1="50" y1="60" x2="530" y2="60" stroke="#f3f4f6" stroke-width="1"/>
+                <line x1="50" y1="120" x2="530" y2="120" stroke="#f3f4f6" stroke-width="1"/>
+                <text x="40" y="25" text-anchor="end" font-size="10" fill="#9ca3af">High</text>
+                <text x="40" y="183" text-anchor="end" font-size="10" fill="#9ca3af">Low</text>
+                <text x="70" y="200" font-size="10" fill="#6b7280">Start</text>
+                <text x="275" y="200" text-anchor="middle" font-size="10" fill="#6b7280">Middle</text>
+                <text x="510" y="200" text-anchor="end" font-size="10" fill="#6b7280">End</text>
+                <path d="M 70 35 C 110 40, 150 70, 190 125 C 230 165, 260 175, 290 170 C 320 175, 350 165, 390 125 C 430 70, 470 40, 510 30" fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="70" cy="35" r="4" fill="#4f46e5"/>
+                <circle cx="190" cy="125" r="4" fill="#4f46e5"/>
+                <circle cx="290" cy="170" r="4" fill="#ef4444"/>
+                <circle cx="390" cy="125" r="4" fill="#4f46e5"/>
+                <circle cx="510" cy="30" r="4" fill="#4f46e5"/>
+                <rect x="220" y="130" width="140" height="35" rx="6" fill="#fef2f2" opacity="0.7"/>
+                <text x="290" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">Your signal is here</text>
+                <line x1="50" y1="145" x2="530" y2="145" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3"/>
+                <text x="533" y="148" font-size="9" fill="#dc2626">no-context baseline</text>
+            </svg>
+            <div class="chart-source">Adapted from Liu et al., "Lost in the Middle" (2023)</div>
+        </div>
 
-        <p><strong>Prompt Repetition</strong> (Leviathan et al., Google Research, 2025) found that the <em>order</em> and <em>structure</em> of information materially changes output quality. Simply repeating the query improved accuracy in 47 out of 70 tests with zero regressions.</p>
+        <h2>It's Not Just Models</h2>
 
-        <p>LLM reasoning starts degrading around 3,000 tokens &mdash; roughly 50 to 60 log lines. That's not a lot of context when your systems generate thousands of lines per minute.</p>
+        <div class="stats">
+            <div class="stat"><div class="num">1.7x</div><div class="label">More issues in<br>AI-generated code</div></div>
+            <div class="stat"><div class="num">2.7x</div><div class="label">More security<br>vulnerabilities</div></div>
+            <div class="stat"><div class="num">8x</div><div class="label">More performance<br>regressions</div></div>
+        </div>
 
-        <h2>It's Not Just Models &mdash; It's AI Output in General</h2>
+        <p>CodeRabbit's study of 470 GitHub PRs (2026): AI models "infer patterns statistically, not semantically." They miss business logic and context that practitioners internalize.</p>
 
-        <p>CodeRabbit's study of 470 GitHub PRs (2026) found that AI-authored work contains <strong>1.7x more issues</strong> than human work &mdash; 75% more logic errors, nearly 2x more error handling gaps, up to 2.74x more security issues.</p>
-
-        <p>The root cause: AI models "infer patterns statistically, not semantically." They miss business logic, local conventions, and context that experienced practitioners internalize.</p>
-
-        <p>Their conclusion: <strong>"Input quality directly correlates with output reliability."</strong></p>
-
-        <p>This applies everywhere. A model summarizing 5,000 raw log lines will produce a confident summary that misses the root cause &mdash; because the signal was buried at position 2,500 where the model's attention is weakest.</p>
+        <div class="finding-box red">
+            <h3>"Input quality directly correlates with output reliability."</h3>
+            <p>A model summarizing 5,000 raw log lines will produce a confident summary that misses the root cause &mdash; because the signal was buried at position 2,500 where the model's attention is weakest.</p>
+        </div>
 
         <h2>The Abstention Problem</h2>
 
-        <p>Here's where it gets uncomfortable.</p>
+        <p>AbstentionBench (June 2025) evaluated 20 frontier models on their ability to say "I don't know."</p>
 
-        <p>AbstentionBench (June 2025) evaluated 20 frontier models on their ability to say "I don't know" across diverse question types &mdash; unanswerable questions, false premises, underspecified problems, subjective topics.</p>
-
-        <p>Two findings that matter:</p>
-
-        <p>First: <strong>scaling doesn't help.</strong> Larger models are not better at abstaining. The ability to know your limits is not a capability that improves with more parameters.</p>
-
-        <p>Second: <strong>reasoning fine-tuning makes it worse.</strong> Reasoning-trained models like DeepSeek R1 showed a <strong>24% drop</strong> in abstention compared to their non-reasoning counterparts. Teaching a model to reason harder makes it <em>less</em> likely to admit it doesn't know.</p>
-
-        <p>This is a fundamental observation. The path to expert-level AI is not "make the model smarter." Smarter models are worse at knowing their limits.</p>
+        <div class="finding-box red">
+            <h3>Scaling doesn't help abstention. Reasoning makes it worse.</h3>
+            <p>Reasoning-trained models showed a <strong>24% drop</strong> in abstention vs their non-reasoning counterparts. Teaching a model to reason harder makes it less likely to admit it doesn't know. The path to expert AI is not "make the model smarter."</p>
+        </div>
 
         <h2>What Context Engineering Actually Is</h2>
 
-        <p>Anthropic's engineering team defines it as finding "the smallest possible set of high-signal tokens that maximize the likelihood of a desired outcome."</p>
+        <p>Anthropic defines it as finding "the smallest possible set of high-signal tokens that maximize the likelihood of a desired outcome." An engineering discipline, not a prompt trick.</p>
 
-        <p>This is an engineering discipline, not a prompt trick. It means:</p>
-
-        <p><strong>Selecting what matters</strong> &mdash; knowing which sources to query based on the specific question and the domain's structure. Not everything is relevant. An expert knows what to look at and what to skip.</p>
-
-        <p><strong>Compressing noise</strong> &mdash; the same error appears 47 times. Health checks flood the output. Systematic deduplication and pattern normalization reduce thousands of lines to hundreds without losing signal.</p>
-
-        <p><strong>Scoring by relevance</strong> &mdash; not all evidence is equally useful for every question. Different question types need different evidence prioritized.</p>
-
-        <p><strong>Assessing quality</strong> &mdash; knowing what you <em>don't</em> have. If a data source is unreachable or returns nothing, that's information. The model needs to see its own blind spots.</p>
-
-        <p><strong>Structuring for attention</strong> &mdash; arranging the context so the model attends to what matters. This isn't formatting &mdash; it's aligned with how transformer attention works.</p>
+        <div class="discipline">
+            <div class="disc-item">
+                <div class="icon">&#x1F50D;</div>
+                <div><h3>Selecting what matters</h3><p>Knowing which sources to query based on the question and domain structure. An expert knows what to look at and what to skip.</p></div>
+            </div>
+            <div class="disc-item">
+                <div class="icon">&#x1F5DC;</div>
+                <div><h3>Compressing noise</h3><p>The same error appears 47 times. Deduplication and pattern normalization reduce thousands of lines to hundreds without losing signal.</p></div>
+            </div>
+            <div class="disc-item">
+                <div class="icon">&#x1F3AF;</div>
+                <div><h3>Scoring by relevance</h3><p>Different question types need different evidence prioritized. Not all evidence is equally useful.</p></div>
+            </div>
+            <div class="disc-item">
+                <div class="icon">&#x26A0;</div>
+                <div><h3>Assessing quality</h3><p>Knowing what you don't have. If a source is unreachable, that's information. The model needs to see its own blind spots.</p></div>
+            </div>
+            <div class="disc-item">
+                <div class="icon">&#x1F4CB;</div>
+                <div><h3>Structuring for attention</h3><p>Arranging context so the model attends to what matters. Aligned with how transformer attention works.</p></div>
+            </div>
+        </div>
 
         <h2>The Assembly-Reasoning Split</h2>
 
-        <p>Working across healthcare and incident management led us to a realization: expertise has two distinct components, and they're often performed by different actors.</p>
+        <p>Working across healthcare and incident management led us to a realization: expertise has two components, often performed by different actors.</p>
 
-        <p><strong>Intelligent assembly</strong> &mdash; knowing what context to gather, for whom, at what moment. This is pattern matching on what-context-helps-when. It's what a senior nephrologist does before they start reasoning about the case &mdash; they know which data points to look at.</p>
+        <!-- Split diagram -->
+        <div class="split-diagram">
+            <h3>Two Components of Expertise</h3>
+            <div class="split-cols">
+                <div class="split-col asm">
+                    <h4>Intelligent Assembly</h4>
+                    <p>Knowing what to gather, for whom, when</p>
+                    <p>Pattern matching on what-context-helps-when</p>
+                    <p>Domain compression, self-knowledge, persistence</p>
+                    <div class="pct">3/5 properties</div>
+                </div>
+                <div class="split-divider">+</div>
+                <div class="split-col rsn">
+                    <h4>Domain Reasoning</h4>
+                    <p>Drawing conclusions from assembled context</p>
+                    <p>Weighing hypotheses, deciding actions</p>
+                    <p>Ambiguity judgment, principled refusal</p>
+                    <div class="pct">2/5 properties</div>
+                </div>
+            </div>
+            <div class="split-finding">
+                <p><strong>In most high-stakes domains, the human is the reasoner.</strong> The system's expertise is in assembly.</p>
+            </div>
+        </div>
 
-        <p><strong>Domain reasoning</strong> &mdash; given assembled context, drawing conclusions and deciding actions.</p>
-
-        <p>The critical finding from our field work: <strong>in most high-stakes domains, the human is the reasoner.</strong> Doctors in routine clinical settings didn't want AI reasoning. They wanted the right context at the right time so they could reason faster. SREs in some cases want AI reasoning (triage brief, RCA), but the foundation is always the same: the context must be assembled first.</p>
-
-        <p>This means the higher-value, more tractable problem is not "how do we make AI reason better" but "how do we make AI assemble context like an expert would."</p>
+        <div class="finding-box green">
+            <h3>The higher-value problem</h3>
+            <p>Not "how do we make AI reason better" &mdash; but "how do we make AI assemble context like an expert would." Assembly is where 60% of the expert value lives. Reasoning is an optional downstream consumer.</p>
+        </div>
 
         <h2>The Uncomfortable Implication</h2>
 
-        <p>With disciplined context engineering, a smaller model can approach the output quality of a larger model on structured tasks.</p>
+        <p>With disciplined context engineering, a smaller model can approach the output quality of a larger model on structured tasks. The ACE framework (ICLR 2026) demonstrated this. At the ARC Prize 2025, a 76K-parameter system outperformed models 1,000x its size through structured representation.</p>
 
-        <p>The ACE framework (ICLR 2026) demonstrated this: a smaller open-source model with engineered context matched the top-ranked production agent &mdash; which used a significantly larger model. At the ARC Prize 2025, a 76K-parameter system outperformed models 1,000x its size through structured representation rather than scale.</p>
-
-        <p>This changes the economics. If context engineering is good enough, the model tier becomes a cost lever, not a quality lever.</p>
+        <p>If context engineering is good enough, the model tier becomes a cost lever, not a quality lever.</p>
 
         <h2>What This Doesn't Solve</h2>
 
-        <p>Context engineering makes the model's output better when evidence exists and can be retrieved. It doesn't help when:</p>
-
-        <ul>
-            <li><strong>The data doesn't exist.</strong> No amount of engineering conjures data that was never logged.</li>
-            <li><strong>The problem requires novel reasoning.</strong> A cascading failure with a non-obvious trigger needs human judgment.</li>
-            <li><strong>The context is inherently ambiguous.</strong> When signals contradict, a human needs to resolve it.</li>
-        </ul>
-
-        <p>And the AbstentionBench finding is a reminder: even with perfect context, the model may still overclaim. External constraints (mandatory evidence citation, structural confidence fields, domain invariant checking) help, but the architecture's bias toward fluent output remains.</p>
+        <div class="limits">
+            <div class="limit"><div class="x">&times;</div><p><strong>The data doesn't exist.</strong> No amount of engineering conjures data that was never logged.</p></div>
+            <div class="limit"><div class="x">&times;</div><p><strong>Novel reasoning needed.</strong> A cascading failure with a non-obvious trigger needs human judgment.</p></div>
+            <div class="limit"><div class="x">&times;</div><p><strong>Inherently ambiguous.</strong> When signals contradict, a human needs to resolve it.</p></div>
+        </div>
 
         <p>The goal is to make expert-level decisions faster &mdash; not to eliminate the expert.</p>
 
         <h2>Where This Goes</h2>
 
-        <p>The teams that get this right will have measurably better outcomes &mdash; lower MTTR for incidents, faster clinical decisions, more accurate triage &mdash; not because they use a fancier model, but because they engineer the context that feeds it.</p>
+        <p>The teams that get this right will have measurably better outcomes &mdash; not because they use a fancier model, but because they engineer the context that feeds it. The domain changes. The discipline doesn't.</p>
 
-        <p>At Saarthi, we've been applying this across healthcare and incident management. The same principles work in both domains. The domain changes. The discipline doesn't.</p>
-
-        <p>More on that in a future post.</p>
-
-        <div class="further-reading">
+        <div class="reading">
             <h2>Further Reading</h2>
             <ul>
-                <li><a href="https://arxiv.org/abs/2307.03172">Liu et al.: Lost in the Middle</a> &mdash; Stanford, 2023</li>
-                <li><a href="https://arxiv.org/abs/2407.01437">Nelson et al.: Needle in the Haystack</a> &mdash; IBM Research, 2024</li>
-                <li><a href="https://arxiv.org/abs/2512.14982">Leviathan et al.: Prompt Repetition</a> &mdash; Google Research, 2025</li>
-                <li><a href="https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report">CodeRabbit: State of AI vs Human Code Generation</a> &mdash; 2026</li>
-                <li><a href="https://arxiv.org/abs/2506.09038">AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions</a> &mdash; 2025</li>
-                <li><a href="https://arxiv.org/abs/2510.04618">ACE: Agentic Context Engineering</a> &mdash; ICLR 2026</li>
-                <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a></li>
+                <li><a href="https://arxiv.org/abs/2307.03172">Liu et al.: Lost in the Middle</a> <span class="src-meta">&mdash; Stanford, 2023</span></li>
+                <li><a href="https://arxiv.org/abs/2407.01437">Nelson et al.: Needle in the Haystack</a> <span class="src-meta">&mdash; IBM Research, 2024</span></li>
+                <li><a href="https://arxiv.org/abs/2512.14982">Leviathan et al.: Prompt Repetition</a> <span class="src-meta">&mdash; Google Research, 2025</span></li>
+                <li><a href="https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report">CodeRabbit: AI vs Human Code</a> <span class="src-meta">&mdash; 2026</span></li>
+                <li><a href="https://arxiv.org/abs/2506.09038">AbstentionBench</a> <span class="src-meta">&mdash; 2025</span></li>
+                <li><a href="https://arxiv.org/abs/2510.04618">ACE: Agentic Context Engineering</a> <span class="src-meta">&mdash; ICLR 2026</span></li>
+                <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Context engineering for AI agents</a></li>
             </ul>
         </div>
 
-        <div class="footer">
-            <p>Part 2 of a series on context engineering in practice. Previously: <a href="oncall-engineers-new-partner.html">The On-Call Engineer's New Partner</a>. Next: applying these principles to an open-source tool.</p>
-            <p style="margin-top: 8px;"><em>Reach out on <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a>.</em></p>
-            <p style="margin-top: 12px;">
-                <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a> &middot;
-                <a href="https://github.com/SaarthiHQ">GitHub</a> &middot;
-                <a href="https://saarthihealth.com">saarthihealth.com</a>
-            </p>
+        <div class="cta">
+            <p>Interested in context engineering? <a href="https://www.linkedin.com/in/ramanansiva">Reach out on LinkedIn</a> &mdash; I'd love to hear what you're building.</p>
         </div>
 
     </div>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar sidebar-right">
+        <div class="sidebar-inner" style="margin-bottom:16px">
+            <h4>In this series</h4>
+            <a href="oncall-engineers-new-partner.html" class="series-link">Part 1: The On-Call Engineer's New Partner</a>
+            <a href="context-engineering.html" class="series-link current">Part 2: Context Engineering Is Not Context Stuffing</a>
+        </div>
+        <div class="sidebar-inner">
+            <h4>Open Source</h4>
+            <p>kairos-agent: AI-powered incident context assembler</p>
+            <p><a href="https://github.com/SaarthiHQ/kairos-agent">View on GitHub</a></p>
+        </div>
+    </aside>
+
+</div>
+
+<div class="bottom-nav">
+    <a href="oncall-engineers-new-partner.html" class="prev">&larr; Prev: The On-Call Engineer's New Partner</a>
+    <a href="../">All posts</a>
+</div>
+
 </body>
 </html>

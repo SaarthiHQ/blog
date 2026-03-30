@@ -3,86 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saarthi Blog</title>
+    <title>Saarthi Blog — Context Engineering & Expert AI Systems</title>
     <meta name="description" content="Context engineering, healthcare AI, and expert systems. Writing from the Saarthi team.">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.7;
-            color: #1a1a1a;
-            background: #fafafa;
-        }
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
-        }
-        h1 {
-            font-size: 2em;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: #0f172a;
-        }
-        .tagline {
-            font-size: 17px;
-            color: #6b7280;
-            margin-bottom: 48px;
-        }
-        .post-list { list-style: none; padding: 0; }
-        .post-item {
-            padding: 20px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .post-item a {
-            font-size: 18px;
-            font-weight: 600;
-            color: #0f172a;
-            text-decoration: none;
-        }
-        .post-item a:hover { color: #4f46e5; }
-        .post-meta {
-            font-size: 13px;
-            color: #9ca3af;
-            margin-top: 4px;
-        }
-        .post-desc {
-            font-size: 15px;
-            color: #6b7280;
-            margin-top: 6px;
-        }
-        .footer {
-            margin-top: 48px;
-            font-size: 14px;
-            color: #9ca3af;
-        }
-        .footer a { color: #4f46e5; text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#1a1a1a;background:#0f172a}
+
+        /* Top navbar */
+        .top-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:#0f172a;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid #1e293b}
+        .top-nav .logo{font-size:16px;font-weight:800;color:#fff;text-decoration:none}
+        .top-nav .logo:hover{color:#fff;text-decoration:none}
+        .top-nav .nav-right{display:flex;align-items:center;gap:20px}
+        .top-nav .nav-right a{font-size:13px;color:#94a3b8;text-decoration:none;transition:color .15s}
+        .top-nav .nav-right a:hover{color:#fff;text-decoration:none}
+
+        .hero{padding:130px 40px 60px;text-align:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(79,70,229,0.08) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(6,182,212,0.06) 0%,transparent 50%)}
+        .hero h1{font-size:2.8em;font-weight:800;color:#fff;margin-bottom:8px;position:relative}
+        .hero .tagline{font-size:18px;color:#94a3b8;max-width:500px;margin:0 auto 32px;position:relative}
+        .hero .nav-links{position:relative}
+        .hero .nav-links a{color:#818cf8;text-decoration:none;font-size:14px;margin:0 12px}
+        .hero .nav-links a:hover{color:#fff}
+
+        .content{max-width:900px;margin:0 auto;padding:40px 24px 80px;background:#fff;min-height:60vh;border-radius:24px 24px 0 0;margin-top:-20px;position:relative}
+
+        .series-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4f46e5;margin-bottom:32px}
+
+        .article-card{display:grid;grid-template-columns:80px 1fr;gap:24px;padding:32px 0;border-bottom:1px solid #f1f5f9;position:relative}
+        .article-card:last-child{border-bottom:none}
+        .article-num{font-size:64px;font-weight:900;color:#f1f5f9;line-height:1}
+        .article-body h2{font-size:22px;font-weight:700;color:#0f172a;margin-bottom:4px}
+        .article-body h2 a{color:#0f172a;text-decoration:none}
+        .article-body h2 a:hover{color:#4f46e5}
+        .article-body .meta{font-size:13px;color:#94a3b8;margin-bottom:10px}
+        .article-body .desc{font-size:15px;color:#64748b;line-height:1.6;margin-bottom:12px}
+        .article-body .tags{display:flex;gap:6px;flex-wrap:wrap}
+        .tag{font-size:11px;padding:3px 10px;border-radius:20px;background:#f1f5f9;color:#64748b;font-weight:500}
+
+        .coming-soon{padding:32px 0;text-align:center}
+        .coming-soon h3{font-size:16px;color:#cbd5e1;font-weight:600;margin-bottom:4px}
+        .coming-soon p{font-size:13px;color:#94a3b8}
+
+        .about{margin-top:48px;padding:32px;background:#f8fafc;border-radius:16px}
+        .about h3{font-size:16px;font-weight:700;color:#0f172a;margin-bottom:8px}
+        .about p{font-size:14px;color:#64748b;margin-bottom:8px}
+        .about a{color:#4f46e5;text-decoration:none}
+
+        .footer{text-align:center;padding:40px;color:#64748b;font-size:13px}
+        .footer a{color:#818cf8;text-decoration:none}
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Saarthi Blog</h1>
-        <p class="tagline">Context engineering, healthcare AI, and expert systems.</p>
 
-        <ul class="post-list">
-            <li class="post-item">
-                <a href="posts/oncall-engineers-new-partner.html">The On-Call Engineer's New Partner: How AI Is Changing Incident Response</a>
-                <div class="post-meta">March 2026 &middot; Part 1 of 3</div>
-                <div class="post-desc">The investigative grunt work that precedes every incident decision is exactly the kind of task AI is built to absorb.</div>
-            </li>
-            <li class="post-item">
-                <a href="posts/context-engineering.html">Context Engineering Is Not Context Stuffing</a>
-                <div class="post-meta">March 2026 &middot; Part 2 of 3</div>
-                <div class="post-desc">What LLM research tells us about building useful AI. Why more context often means worse results, and how to engineer context that works.</div>
-            </li>
-        </ul>
+<nav class="top-nav">
+    <a href="https://saarthihealth.com" class="logo">Saarthi</a>
+    <div class="nav-right">
+        <a href="./">Blog</a>
+        <a href="https://github.com/SaarthiHQ/kairos-agent">kairos</a>
+        <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a>
+        <a href="https://saarthihealth.com">saarthihealth.com</a>
+    </div>
+</nav>
 
-        <div class="footer">
-            <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a> &middot;
-            <a href="https://github.com/SaarthiHQ">GitHub</a> &middot;
-            <a href="https://saarthihealth.com">saarthihealth.com</a>
+<div class="hero">
+    <h1>Saarthi Blog</h1>
+    <p class="tagline">Context engineering, healthcare AI, and expert systems.</p>
+    <div class="nav-links">
+        <a href="https://saarthihealth.com">Home</a>
+        <a href="https://github.com/SaarthiHQ">GitHub</a>
+        <a href="https://www.linkedin.com/in/ramanansiva">LinkedIn</a>
+    </div>
+</div>
+
+<div class="content">
+
+    <div class="series-label">Series: Context Engineering in Practice</div>
+
+    <div class="article-card">
+        <div class="article-num">01</div>
+        <div class="article-body">
+            <h2><a href="posts/oncall-engineers-new-partner.html">The On-Call Engineer's New Partner: How AI Is Changing Incident Response</a></h2>
+            <div class="meta">March 2026 &middot; Part 1 of 3 &middot; 8 min read</div>
+            <div class="desc">When a PagerDuty alert fires at 3am, the first 20 minutes look the same everywhere. The investigative grunt work that precedes every decision is exactly the kind of task AI is built to absorb. But the industry is already moving — and the question is what engineers should actually spend their time on.</div>
+            <div class="tags">
+                <span class="tag">Incident Response</span>
+                <span class="tag">On-Call</span>
+                <span class="tag">AI</span>
+                <span class="tag">Context Engineering</span>
+            </div>
         </div>
     </div>
+
+    <div class="article-card">
+        <div class="article-num">02</div>
+        <div class="article-body">
+            <h2><a href="posts/context-engineering.html">Context Engineering Is Not Context Stuffing</a></h2>
+            <div class="meta">March 2026 &middot; Part 2 of 3 &middot; 12 min read</div>
+            <div class="desc">More context often means worse results. Reasoning-trained models are 24% worse at saying "I don't know." The path to expert AI isn't bigger models — it's disciplined context assembly. What the research says, what our field deployment across healthcare and incident management revealed, and why the assembly-reasoning split matters.</div>
+            <div class="tags">
+                <span class="tag">Context Engineering</span>
+                <span class="tag">LLM Research</span>
+                <span class="tag">Healthcare AI</span>
+                <span class="tag">Expert Systems</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="coming-soon">
+        <h3>Part 3 coming soon</h3>
+        <p>What makes an AI expert — and why current architectures fundamentally can't get there.</p>
+    </div>
+
+    <div class="about">
+        <h3>About Saarthi</h3>
+        <p>We build AI systems for doctors and on-call engineers. Two domains, same core problem: assembling the right context for the right decision at the right moment.</p>
+        <p><a href="https://saarthihealth.com">saarthihealth.com</a> &middot; <a href="https://github.com/SaarthiHQ/kairos-agent">kairos-agent (open source)</a></p>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>&copy; 2026 Saarthi &middot; <a href="https://www.linkedin.com/in/ramanansiva">Ramanan Sivasubramanian</a></p>
+</div>
+
 </body>
 </html>
